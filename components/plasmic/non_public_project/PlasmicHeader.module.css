@@ -1,0 +1,343 @@
+.container {
+  background: rgba(255, 255, 255, 1);
+  width: 1444px;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  position: relative;
+  padding: 24px;
+}
+.navbar {
+  background: rgba(255, 255, 255, 1);
+  height: auto;
+  display: flex;
+  position: relative;
+  align-self: stretch;
+  overflow: hidden;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: center;
+}
+.navbarContainer {
+  height: auto;
+  display: flex;
+  position: relative;
+  flex-grow: 1;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+.navbarContent {
+  height: auto;
+  display: flex;
+  position: relative;
+  flex-grow: 1;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+.navbarBrand {
+  width: 165px;
+  height: auto;
+  display: flex;
+  position: relative;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-shrink: 0;
+}
+.aLogo {
+  background: url("/plasmic/non_public_project/images/aLogo.png") center center / cover no-repeat;
+  width: 165px;
+  height: 37px;
+  display: flex;
+  position: relative;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.navbarMenu {
+  width: auto;
+  height: auto;
+  display: flex;
+  position: relative;
+  overflow: hidden;
+  flex-direction: row;
+  column-gap: 32px;
+  align-items: center;
+  justify-content: flex-end;
+}
+.aNavbarLink {
+  width: auto;
+  height: auto;
+  display: flex;
+  position: relative;
+  flex-direction: row;
+  column-gap: 10px;
+  align-items: center;
+  justify-content: center;
+}
+.button {
+  display: block;
+  font-size: 16px;
+  text-align: center;
+  font-family: "Avenir Next";
+  font-weight: 600;
+  letter-spacing: -0.0020000000298023225em;
+  line-height: 100%;
+  color: rgba(29, 68, 128, 1);
+  position: relative;
+}
+.svg__pLyyB {
+  object-fit: cover;
+  max-width: 100%;
+  color: #1d4480;
+  width: 12px;
+  height: 7px;
+  display: block;
+  position: relative;
+  flex-shrink: 0;
+}
+.aNavbarLink2 {
+  width: auto;
+  height: auto;
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  row-gap: 10px;
+  align-items: center;
+  justify-content: center;
+}
+.button2 {
+  display: block;
+  font-size: 16px;
+  text-align: center;
+  font-family: "Avenir Next";
+  font-weight: 600;
+  letter-spacing: -0.0020000000298023225em;
+  line-height: 100%;
+  color: rgba(29, 68, 128, 1);
+  position: relative;
+}
+.aNavbarLink3 {
+  width: auto;
+  height: auto;
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  row-gap: 10px;
+  align-items: center;
+  justify-content: center;
+}
+.button3 {
+  display: block;
+  font-size: 16px;
+  text-align: center;
+  font-family: "Avenir Next";
+  font-weight: 600;
+  letter-spacing: -0.0020000000298023225em;
+  line-height: 100%;
+  color: rgba(29, 68, 128, 1);
+  position: relative;
+}
+.aNavbarLink4 {
+  width: auto;
+  height: auto;
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  row-gap: 10px;
+  align-items: center;
+  justify-content: center;
+}
+.button4 {
+  display: block;
+  font-size: 16px;
+  text-align: center;
+  font-family: "Avenir Next";
+  font-weight: 600;
+  letter-spacing: -0.0020000000298023225em;
+  line-height: 100%;
+  color: rgba(29, 68, 128, 1);
+  position: relative;
+}
+.searchWrapper {
+  width: 270px;
+  height: auto;
+  display: flex;
+  position: relative;
+  flex-direction: row;
+  column-gap: 10px;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.searchForm {
+  width: 242px;
+  height: auto;
+  display: flex;
+  position: relative;
+  flex-direction: row;
+  column-gap: 16px;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-shrink: 0;
+}
+.searchInput {
+  height: auto;
+  display: flex;
+  position: relative;
+  flex-grow: 1;
+  flex-direction: column;
+  row-gap: 8px;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+.formTextInput {
+  height: 42px;
+  display: flex;
+  position: relative;
+  align-self: stretch;
+  flex-direction: row;
+  column-gap: 8px;
+  align-items: center;
+  justify-content: flex-start;
+  flex-shrink: 0;
+  padding: 12px;
+}
+.czegoSzukasz {
+  display: block;
+  font-size: 16px;
+  font-family: "Inter", sans-serif;
+  font-weight: 400;
+  letter-spacing: -0.0020000000298023225em;
+  line-height: 100%;
+  color: rgba(210, 210, 215, 1);
+  position: relative;
+}
+.searchButton {
+  width: 12px;
+  display: flex;
+  position: relative;
+  align-self: stretch;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.navbarInconsButtonWrapper {
+  width: 130px;
+  height: auto;
+  display: flex;
+  position: relative;
+  flex-direction: row;
+  column-gap: 20px;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.svg__rcS05 {
+  object-fit: cover;
+  max-width: 100%;
+  color: #163567;
+  width: 22px;
+  height: 18.205617904663086px;
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  row-gap: 10px;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.svg__eLq1R {
+  object-fit: cover;
+  max-width: 100%;
+  color: #163567;
+  width: 22px;
+  height: 20.980003356933594px;
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  row-gap: 10px;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.svg__ehhup {
+  object-fit: cover;
+  max-width: 100%;
+  color: #163567;
+  width: 22px;
+  height: 19.269001007080078px;
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  row-gap: 10px;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.navbarLogin {
+  width: 130px;
+  height: auto;
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  row-gap: 10px;
+  align-items: flex-end;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.aNavbarLoginButton {
+  background: url("/plasmic/non_public_project/images/aNavbarLoginButton.png") center center / cover no-repeat;
+  width: 130px;
+  height: 45px;
+  display: flex;
+  position: relative;
+  flex-direction: row;
+  column-gap: 8px;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  padding: 8px 20px;
+}
+.login {
+  display: block;
+  font-size: 13px;
+  font-family: "Avenir Next";
+  font-weight: 600;
+  letter-spacing: 0em;
+  line-height: 1.399999976158142;
+  color: rgba(255, 255, 255, 1);
+  position: relative;
+}
+.loginauthState_loggedIn {
+  font-size: 12px;
+}
+.aNavbarSignup {
+  width: 130px;
+  height: 14px;
+  display: flex;
+  position: relative;
+  flex-direction: row;
+  column-gap: 8px;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  padding: 8px 20px;
+}
+.signUp {
+  display: block;
+  font-size: 13px;
+  text-decoration-line: underline;
+  font-family: "Avenir Next";
+  font-weight: 600;
+  letter-spacing: 0em;
+  line-height: 1.399999976158142;
+  color: rgba(29, 68, 128, 1);
+  position: relative;
+}
