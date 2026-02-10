@@ -292,31 +292,15 @@
   justify-content: center;
   flex-shrink: 0;
 }
-.aNavbarLoginButton {
-  background: url("/plasmic/non_public_project/images/aNavbarLoginButton.png") center center / cover no-repeat;
-  width: 130px;
-  height: 45px;
-  display: flex;
+.customButton:global(.__wab_instance) {
   position: relative;
-  flex-direction: row;
-  column-gap: 8px;
-  align-items: center;
-  justify-content: center;
   flex-shrink: 0;
-  padding: 8px 20px;
 }
-.login {
-  display: block;
-  font-size: 13px;
-  font-family: "Avenir Next";
-  font-weight: 600;
-  letter-spacing: 0em;
-  line-height: 1.399999976158142;
-  color: rgba(255, 255, 255, 1);
-  position: relative;
+.customButtonauthState_loggedIn:global(.__wab_instance) {
+  flex-shrink: 0;
 }
-.loginauthState_loggedIn {
-  font-size: 12px;
+.customButtonauthState_loggedOut:global(.__wab_instance) {
+  flex-shrink: 0;
 }
 .aNavbarSignup {
   width: 130px;

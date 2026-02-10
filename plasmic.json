@@ -186,6 +186,19 @@
           "scheme": "blackbox",
           "componentType": "page",
           "path": "/create-account"
+        },
+        {
+          "id": "IZmBAcfmTjEv",
+          "name": "CustomButton",
+          "type": "managed",
+          "projectId": "bQQiQNuPFqALjXn1i5mrPi",
+          "renderModuleFilePath": "plasmic/non_public_project/PlasmicCustomButton.tsx",
+          "importSpec": {
+            "modulePath": "CustomButton.tsx"
+          },
+          "cssFilePath": "plasmic/non_public_project/PlasmicCustomButton.module.css",
+          "scheme": "blackbox",
+          "componentType": "component"
         }
       ],
       "icons": [

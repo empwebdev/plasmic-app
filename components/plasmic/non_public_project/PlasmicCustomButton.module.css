@@ -1,0 +1,25 @@
+.aNavbarLoginButton {
+  background: url("/plasmic/non_public_project/images/aNavbarLoginButton.png") center center / cover no-repeat;
+  width: 130px;
+  height: 45px;
+  display: flex;
+  flex-direction: row;
+  column-gap: 8px;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  padding: 8px 20px;
+}
+.manageAccount {
+  display: block;
+  font-size: 13px;
+  font-family: "Avenir Next";
+  font-weight: 600;
+  letter-spacing: 0em;
+  line-height: 1.399999976158142;
+  color: rgba(255, 255, 255, 1);
+  position: relative;
+}
+.manageAccountauthState_loggedIn {
+  font-size: 12px;
+}

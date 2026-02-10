@@ -59,6 +59,7 @@ import {
   useGlobalActions
 } from "@plasmicapp/react-web/lib/host";
 
+import CustomButton from "../../CustomButton"; // plasmic-import: IZmBAcfmTjEv/component
 import { _useGlobalVariants } from "./plasmic"; // plasmic-import: bQQiQNuPFqALjXn1i5mrPi/projectModule
 import { _useStyleTokens } from "./PlasmicStyleTokensProvider"; // plasmic-import: bQQiQNuPFqALjXn1i5mrPi/styleTokensProvider
 
@@ -113,8 +114,7 @@ export type PlasmicHeader__OverridesType = {
   searchButton?: Flex__<"div">;
   navbarInconsButtonWrapper?: Flex__<"div">;
   navbarLogin?: Flex__<"div">;
-  aNavbarLoginButton?: Flex__<"div">;
-  login?: Flex__<"div">;
+  customButton?: Flex__<typeof CustomButton>;
   aNavbarSignup?: Flex__<"div">;
   signUp?: Flex__<"div">;
 };
@@ -221,7 +221,13 @@ function PlasmicHeader__RenderFunc(props: {
               <div
                 data-plasmic-name={"aLogo"}
                 data-plasmic-override={overrides.aLogo}
-                className={classNames(projectcss.all, sty.aLogo)}
+                className={classNames(projectcss.all, sty.aLogo, {
+                  [sty.aLogoauthState_loggedOut]: hasVariant(
+                    $state,
+                    "authState",
+                    "loggedOut"
+                  )
+                })}
                 onClick={async event => {
                   const $steps = {};
 
@@ -412,70 +418,28 @@ function PlasmicHeader__RenderFunc(props: {
                   )
                 })}
               >
-                <div
-                  data-plasmic-name={"aNavbarLoginButton"}
-                  data-plasmic-override={overrides.aNavbarLoginButton}
-                  className={classNames(
-                    projectcss.all,
-                    sty.aNavbarLoginButton,
-                    {
-                      [sty.aNavbarLoginButtonauthState_loggedIn]: hasVariant(
-                        $state,
-                        "authState",
-                        "loggedIn"
-                      )
-                    }
-                  )}
-                  onClick={async event => {
-                    const $steps = {};
+                <CustomButton
+                  data-plasmic-name={"customButton"}
+                  data-plasmic-override={overrides.customButton}
+                  authState={
+                    hasVariant($state, "authState", "loggedIn")
+                      ? "loggedIn"
+                      : "loggedOut"
+                  }
+                  className={classNames("__wab_instance", sty.customButton, {
+                    [sty.customButtonauthState_loggedIn]: hasVariant(
+                      $state,
+                      "authState",
+                      "loggedIn"
+                    ),
+                    [sty.customButtonauthState_loggedOut]: hasVariant(
+                      $state,
+                      "authState",
+                      "loggedOut"
+                    )
+                  })}
+                />
 
-                    $steps["goToLogin"] = true
-                      ? (() => {
-                          const actionArgs = { destination: `/login` };
-                          return (({ destination }) => {
-                            if (
-                              typeof destination === "string" &&
-                              destination.startsWith("#")
-                            ) {
-                              document
-                                .getElementById(destination.substr(1))
-                                .scrollIntoView({ behavior: "smooth" });
-                            } else {
-                              __nextRouter?.push(destination);
-                            }
-                          })?.apply(null, [actionArgs]);
-                        })()
-                      : undefined;
-                    if (
-                      $steps["goToLogin"] != null &&
-                      typeof $steps["goToLogin"] === "object" &&
-                      typeof $steps["goToLogin"].then === "function"
-                    ) {
-                      $steps["goToLogin"] = await $steps["goToLogin"];
-                    }
-                  }}
-                >
-                  <div
-                    data-plasmic-name={"login"}
-                    data-plasmic-override={overrides.login}
-                    className={classNames(
-                      projectcss.all,
-                      projectcss.__wab_text,
-                      sty.login,
-                      {
-                        [sty.loginauthState_loggedIn]: hasVariant(
-                          $state,
-                          "authState",
-                          "loggedIn"
-                        )
-                      }
-                    )}
-                  >
-                    {hasVariant($state, "authState", "loggedIn")
-                      ? "Manage Account"
-                      : "Log in"}
-                  </div>
-                </div>
                 <div
                   data-plasmic-name={"aNavbarSignup"}
                   data-plasmic-override={overrides.aNavbarSignup}
@@ -493,39 +457,16 @@ function PlasmicHeader__RenderFunc(props: {
                           $state,
                           "authState",
                           "loggedIn"
+                        ),
+                        [sty.signUpauthState_loggedOut]: hasVariant(
+                          $state,
+                          "authState",
+                          "loggedOut"
                         )
                       }
                     )}
                     onClick={async event => {
                       const $steps = {};
-
-                      $steps["goToCreateAccount"] = true
-                        ? (() => {
-                            const actionArgs = {
-                              destination: `/create-account`
-                            };
-                            return (({ destination }) => {
-                              if (
-                                typeof destination === "string" &&
-                                destination.startsWith("#")
-                              ) {
-                                document
-                                  .getElementById(destination.substr(1))
-                                  .scrollIntoView({ behavior: "smooth" });
-                              } else {
-                                __nextRouter?.push(destination);
-                              }
-                            })?.apply(null, [actionArgs]);
-                          })()
-                        : undefined;
-                      if (
-                        $steps["goToCreateAccount"] != null &&
-                        typeof $steps["goToCreateAccount"] === "object" &&
-                        typeof $steps["goToCreateAccount"].then === "function"
-                      ) {
-                        $steps["goToCreateAccount"] =
-                          await $steps["goToCreateAccount"];
-                      }
                     }}
                   >
                     {hasVariant($state, "authState", "loggedIn")
@@ -567,8 +508,7 @@ const PlasmicDescendants = {
     "searchButton",
     "navbarInconsButtonWrapper",
     "navbarLogin",
-    "aNavbarLoginButton",
-    "login",
+    "customButton",
     "aNavbarSignup",
     "signUp"
   ],
@@ -595,8 +535,7 @@ const PlasmicDescendants = {
     "searchButton",
     "navbarInconsButtonWrapper",
     "navbarLogin",
-    "aNavbarLoginButton",
-    "login",
+    "customButton",
     "aNavbarSignup",
     "signUp"
   ],
@@ -622,8 +561,7 @@ const PlasmicDescendants = {
     "searchButton",
     "navbarInconsButtonWrapper",
     "navbarLogin",
-    "aNavbarLoginButton",
-    "login",
+    "customButton",
     "aNavbarSignup",
     "signUp"
   ],
@@ -648,8 +586,7 @@ const PlasmicDescendants = {
     "searchButton",
     "navbarInconsButtonWrapper",
     "navbarLogin",
-    "aNavbarLoginButton",
-    "login",
+    "customButton",
     "aNavbarSignup",
     "signUp"
   ],
@@ -673,8 +610,7 @@ const PlasmicDescendants = {
     "searchButton",
     "navbarInconsButtonWrapper",
     "navbarLogin",
-    "aNavbarLoginButton",
-    "login",
+    "customButton",
     "aNavbarSignup",
     "signUp"
   ],
@@ -706,15 +642,8 @@ const PlasmicDescendants = {
   czegoSzukasz: ["czegoSzukasz"],
   searchButton: ["searchButton"],
   navbarInconsButtonWrapper: ["navbarInconsButtonWrapper"],
-  navbarLogin: [
-    "navbarLogin",
-    "aNavbarLoginButton",
-    "login",
-    "aNavbarSignup",
-    "signUp"
-  ],
-  aNavbarLoginButton: ["aNavbarLoginButton", "login"],
-  login: ["login"],
+  navbarLogin: ["navbarLogin", "customButton", "aNavbarSignup", "signUp"],
+  customButton: ["customButton"],
   aNavbarSignup: ["aNavbarSignup", "signUp"],
   signUp: ["signUp"]
 } as const;
@@ -745,8 +674,7 @@ type NodeDefaultElementType = {
   searchButton: "div";
   navbarInconsButtonWrapper: "div";
   navbarLogin: "div";
-  aNavbarLoginButton: "div";
-  login: "div";
+  customButton: typeof CustomButton;
   aNavbarSignup: "div";
   signUp: "div";
 };
@@ -835,8 +763,7 @@ export const PlasmicHeader = Object.assign(
     searchButton: makeNodeComponent("searchButton"),
     navbarInconsButtonWrapper: makeNodeComponent("navbarInconsButtonWrapper"),
     navbarLogin: makeNodeComponent("navbarLogin"),
-    aNavbarLoginButton: makeNodeComponent("aNavbarLoginButton"),
-    login: makeNodeComponent("login"),
+    customButton: makeNodeComponent("customButton"),
     aNavbarSignup: makeNodeComponent("aNavbarSignup"),
     signUp: makeNodeComponent("signUp"),
 
