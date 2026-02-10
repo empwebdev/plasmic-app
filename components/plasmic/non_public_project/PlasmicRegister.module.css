@@ -1,0 +1,64 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 100%;
+  height: auto;
+  justify-content: flex-start;
+  align-items: center;
+  background: #ffffff;
+  min-width: 0;
+  padding: 10px;
+}
+.firstName:global(.__wab_instance):global(.__wab_instance) {
+  max-width: 100%;
+  position: absolute;
+  left: 472px;
+  top: 65px;
+  width: auto;
+}
+.lastName:global(.__wab_instance):global(.__wab_instance) {
+  max-width: 100%;
+  width: auto;
+  position: absolute;
+  left: 472px;
+  top: 103px;
+}
+.email:global(.__wab_instance):global(.__wab_instance) {
+  max-width: 100%;
+  width: auto;
+  position: absolute;
+  left: 472px;
+  top: 142px;
+}
+.phone:global(.__wab_instance):global(.__wab_instance) {
+  max-width: 100%;
+  position: absolute;
+  left: 470px;
+  top: 181px;
+  width: auto;
+}
+.password:global(.__wab_instance):global(.__wab_instance) {
+  max-width: 100%;
+  width: auto;
+  position: absolute;
+  left: 470px;
+  top: 218px;
+}
+.submit:global(.__wab_instance):global(.__wab_instance) {
+  max-width: 100%;
+  position: absolute;
+  left: 557px;
+  top: 265px;
+}
+.svg__sjvmg {
+  position: relative;
+  height: 1em;
+}
+.text {
+  white-space: pre;
+}
+.svg__ykRt {
+  position: relative;
+  height: 1em;
+}

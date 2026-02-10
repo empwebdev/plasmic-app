@@ -222,6 +222,34 @@ function PlasmicHeader__RenderFunc(props: {
                 data-plasmic-name={"aLogo"}
                 data-plasmic-override={overrides.aLogo}
                 className={classNames(projectcss.all, sty.aLogo)}
+                onClick={async event => {
+                  const $steps = {};
+
+                  $steps["goToHomepage"] = true
+                    ? (() => {
+                        const actionArgs = { destination: `/` };
+                        return (({ destination }) => {
+                          if (
+                            typeof destination === "string" &&
+                            destination.startsWith("#")
+                          ) {
+                            document
+                              .getElementById(destination.substr(1))
+                              .scrollIntoView({ behavior: "smooth" });
+                          } else {
+                            __nextRouter?.push(destination);
+                          }
+                        })?.apply(null, [actionArgs]);
+                      })()
+                    : undefined;
+                  if (
+                    $steps["goToHomepage"] != null &&
+                    typeof $steps["goToHomepage"] === "object" &&
+                    typeof $steps["goToHomepage"].then === "function"
+                  ) {
+                    $steps["goToHomepage"] = await $steps["goToHomepage"];
+                  }
+                }}
               />
             </div>
             <div
@@ -387,7 +415,45 @@ function PlasmicHeader__RenderFunc(props: {
                 <div
                   data-plasmic-name={"aNavbarLoginButton"}
                   data-plasmic-override={overrides.aNavbarLoginButton}
-                  className={classNames(projectcss.all, sty.aNavbarLoginButton)}
+                  className={classNames(
+                    projectcss.all,
+                    sty.aNavbarLoginButton,
+                    {
+                      [sty.aNavbarLoginButtonauthState_loggedIn]: hasVariant(
+                        $state,
+                        "authState",
+                        "loggedIn"
+                      )
+                    }
+                  )}
+                  onClick={async event => {
+                    const $steps = {};
+
+                    $steps["goToLogin"] = true
+                      ? (() => {
+                          const actionArgs = { destination: `/login` };
+                          return (({ destination }) => {
+                            if (
+                              typeof destination === "string" &&
+                              destination.startsWith("#")
+                            ) {
+                              document
+                                .getElementById(destination.substr(1))
+                                .scrollIntoView({ behavior: "smooth" });
+                            } else {
+                              __nextRouter?.push(destination);
+                            }
+                          })?.apply(null, [actionArgs]);
+                        })()
+                      : undefined;
+                    if (
+                      $steps["goToLogin"] != null &&
+                      typeof $steps["goToLogin"] === "object" &&
+                      typeof $steps["goToLogin"].then === "function"
+                    ) {
+                      $steps["goToLogin"] = await $steps["goToLogin"];
+                    }
+                  }}
                 >
                   <div
                     data-plasmic-name={"login"}
@@ -430,6 +496,37 @@ function PlasmicHeader__RenderFunc(props: {
                         )
                       }
                     )}
+                    onClick={async event => {
+                      const $steps = {};
+
+                      $steps["goToCreateAccount"] = true
+                        ? (() => {
+                            const actionArgs = {
+                              destination: `/create-account`
+                            };
+                            return (({ destination }) => {
+                              if (
+                                typeof destination === "string" &&
+                                destination.startsWith("#")
+                              ) {
+                                document
+                                  .getElementById(destination.substr(1))
+                                  .scrollIntoView({ behavior: "smooth" });
+                              } else {
+                                __nextRouter?.push(destination);
+                              }
+                            })?.apply(null, [actionArgs]);
+                          })()
+                        : undefined;
+                      if (
+                        $steps["goToCreateAccount"] != null &&
+                        typeof $steps["goToCreateAccount"] === "object" &&
+                        typeof $steps["goToCreateAccount"].then === "function"
+                      ) {
+                        $steps["goToCreateAccount"] =
+                          await $steps["goToCreateAccount"];
+                      }
+                    }}
                   >
                     {hasVariant($state, "authState", "loggedIn")
                       ? "Log Out"

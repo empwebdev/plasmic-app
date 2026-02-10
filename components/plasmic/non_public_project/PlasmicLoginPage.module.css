@@ -1,0 +1,47 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 100%;
+  height: auto;
+  justify-content: flex-start;
+  align-items: center;
+  background: #ffffff;
+  min-width: 0;
+  padding: 10px;
+}
+.password:global(.__wab_instance):global(.__wab_instance) {
+  max-width: 100%;
+  width: 861px;
+  left: 149px;
+  top: 64px;
+  position: absolute;
+}
+.email:global(.__wab_instance):global(.__wab_instance) {
+  max-width: 100%;
+  align-self: stretch;
+  left: 149px;
+  top: 22px;
+  z-index: 1;
+  position: absolute;
+  width: 861px;
+  margin: 0px;
+}
+.login:global(.__wab_instance):global(.__wab_instance) {
+  max-width: 100%;
+  position: absolute;
+  left: 563px;
+  top: 120px;
+}
+.svg__cYs5J {
+  position: relative;
+  height: 1em;
+}
+.text {
+  white-space: pre;
+  color: var(--token-VIuWTVAr5GQl);
+}
+.svg__xMl8U {
+  position: relative;
+  height: 1em;
+}
