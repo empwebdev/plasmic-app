@@ -6,6 +6,9 @@ import {
   DefaultRegisterProps
 } from "./plasmic/non_public_project/PlasmicRegister";
 import { HTMLElementRefOf } from "@plasmicapp/react-web";
+import { useRouter } from "next/router";
+import { sdk } from "../lib/sdk";
+import { FetchError } from "@medusajs/js-sdk";
 
 // Your component props start with props for variants and slots you defined
 // in Plasmic, but you can add more here, like event handlers that you can
@@ -23,22 +26,129 @@ import { HTMLElementRefOf } from "@plasmicapp/react-web";
 export interface RegisterProps extends DefaultRegisterProps {}
 
 function Register_(props: RegisterProps, ref: HTMLElementRefOf<"div">) {
-  // Use PlasmicRegister to render this component as it was
-  // designed in Plasmic, by activating the appropriate variants,
-  // attaching the appropriate event handlers, etc.  You
-  // can also install whatever React hooks you need here to manage state or
-  // fetch data.
-  //
-  // Props you can pass into PlasmicRegister are:
-  // 1. Variants you want to activate,
-  // 2. Contents for slots you want to fill,
-  // 3. Overrides for any named node in the component to attach behavior and data,
-  // 4. Props to set on the root node.
-  //
-  // By default, we are just piping all RegisterProps here, but feel free
-  // to do whatever works for you.
+  const router = useRouter();
 
-  return <PlasmicRegister root={{ ref }} {...props} />;
+  const [firstName, setFirstName] = React.useState("");
+  const [lastName, setLastName] = React.useState("");
+  const [email, setEmail] = React.useState("");
+  const [phone, setPhone] = React.useState("");
+  const [password, setPassword] = React.useState("");
+  const [isSubmitting, setIsSubmitting] = React.useState(false);
+
+  const handleRegistration = async (
+    event?: { preventDefault?: () => void }
+  ) => {
+    event?.preventDefault?.();
+
+    if (!firstName || !lastName || !email || !password) {
+      // Basic validation; you can surface this in the UI if needed.
+      return;
+    }
+
+    setIsSubmitting(true);
+
+    try {
+      // Step 1: obtain registration token
+      await sdk.auth.register("customer", "emailpass", {
+        email,
+        password,
+      });
+    } catch (error) {
+      const fetchError = error as FetchError;
+
+      const isExistingIdentityError =
+        fetchError.statusText === "Unauthorized" &&
+        fetchError.message === "Identity with email already exists";
+
+      if (!isExistingIdentityError) {
+        // For now, surface the error plainly; you can replace alerts with
+        // a nicer UI later.
+        // eslint-disable-next-line no-alert
+        alert(`An error occurred while creating account: ${fetchError}`);
+        setIsSubmitting(false);
+        return;
+      }
+
+      // Existing identity (for example, admin user) uses this email.
+      // Try logging in so we can still create a customer.
+      const loginResponse = await sdk.auth
+        .login("customer", "emailpass", {
+          email,
+          password,
+        })
+        .catch((loginError: unknown) => {
+          // eslint-disable-next-line no-alert
+          alert(
+            `An error occurred while creating account: ${String(loginError)}`
+          );
+        });
+
+      if (!loginResponse) {
+        setIsSubmitting(false);
+        return;
+      }
+
+      if (typeof loginResponse !== "string") {
+        // eslint-disable-next-line no-alert
+        alert(
+          "Authentication requires more actions, which isn't supported by this flow."
+        );
+        setIsSubmitting(false);
+        return;
+      }
+    }
+
+    try {
+      // Step 2: register the customer in Medusa
+      await sdk.store.customer.create({
+        first_name: firstName,
+        last_name: lastName,
+        email,
+        phone,
+      });
+
+      setIsSubmitting(false);
+
+      // eslint-disable-next-line no-alert
+      alert("Account created successfully. You can now log in.");
+      void router.push("/login");
+    } catch (error) {
+      // eslint-disable-next-line no-alert
+      alert("Error creating customer: " + String(error));
+      setIsSubmitting(false);
+    }
+  };
+
+  return (
+    <PlasmicRegister
+      root={{ ref }}
+      firstName={{
+        value: firstName,
+        onChange: (val: string) => setFirstName(val),
+      }}
+      lastName={{
+        value: lastName,
+        onChange: (val: string) => setLastName(val),
+      }}
+      email={{
+        value: email,
+        onChange: (val: string) => setEmail(val),
+      }}
+      phone={{
+        value: phone,
+        onChange: (val: string) => setPhone(val),
+      }}
+      password={{
+        value: password,
+        onChange: (val: string) => setPassword(val),
+      }}
+      submit={{
+        disabled: isSubmitting,
+        onClick: handleRegistration,
+      }}
+      {...props}
+    />
+  );
 }
 
 const Register = React.forwardRef(Register_);

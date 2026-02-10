@@ -6,6 +6,9 @@ import {
   DefaultLoginPageProps
 } from "./plasmic/non_public_project/PlasmicLoginPage";
 import { HTMLElementRefOf } from "@plasmicapp/react-web";
+import { useRouter } from "next/router";
+import { sdk } from "../lib/sdk";
+import { FetchError } from "@medusajs/js-sdk";
 
 // Your component props start with props for variants and slots you defined
 // in Plasmic, but you can add more here, like event handlers that you can
@@ -23,22 +26,64 @@ import { HTMLElementRefOf } from "@plasmicapp/react-web";
 export interface LoginPageProps extends DefaultLoginPageProps {}
 
 function LoginPage_(props: LoginPageProps, ref: HTMLElementRefOf<"div">) {
-  // Use PlasmicLoginPage to render this component as it was
-  // designed in Plasmic, by activating the appropriate variants,
-  // attaching the appropriate event handlers, etc.  You
-  // can also install whatever React hooks you need here to manage state or
-  // fetch data.
-  //
-  // Props you can pass into PlasmicLoginPage are:
-  // 1. Variants you want to activate,
-  // 2. Contents for slots you want to fill,
-  // 3. Overrides for any named node in the component to attach behavior and data,
-  // 4. Props to set on the root node.
-  //
-  // By default, we are just piping all LoginPageProps here, but feel free
-  // to do whatever works for you.
+  const router = useRouter();
 
-  return <PlasmicLoginPage root={{ ref }} {...props} />;
+  const [email, setEmail] = React.useState("");
+  const [password, setPassword] = React.useState("");
+  const [isSubmitting, setIsSubmitting] = React.useState(false);
+
+  const handleLogin = async (event?: { preventDefault?: () => void }) => {
+    event?.preventDefault?.();
+
+    if (!email || !password) {
+      // Basic validation; you can surface this in the UI if needed.
+      return;
+    }
+
+    setIsSubmitting(true);
+
+    try {
+      await sdk.auth.login("customer", "emailpass", {
+        email,
+        password,
+      });
+
+      setIsSubmitting(false);
+
+      // eslint-disable-next-line no-alert
+      alert("Logged in successfully.");
+      void router.push("/");
+    } catch (error) {
+      const fetchError = error as FetchError;
+
+      // eslint-disable-next-line no-alert
+      alert(
+        `Login failed: ${fetchError.statusText ?? ""} ${
+          fetchError.message ?? String(error)
+        }`
+      );
+      setIsSubmitting(false);
+    }
+  };
+
+  return (
+    <PlasmicLoginPage
+      root={{ ref }}
+      email={{
+        value: email,
+        onChange: (val: string) => setEmail(val),
+      }}
+      password={{
+        value: password,
+        onChange: (val: string) => setPassword(val),
+      }}
+      login={{
+        disabled: isSubmitting,
+        onClick: handleLogin,
+      }}
+      {...props}
+    />
+  );
 }
 
 const LoginPage = React.forwardRef(LoginPage_);

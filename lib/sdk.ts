@@ -1,0 +1,12 @@
+import Medusa from "@medusajs/js-sdk";
+
+const MEDUSA_BACKEND_URL =
+  process.env.NEXT_PUBLIC_MEDUSA_URL ?? "http://localhost:9000";
+
+export const sdk = new Medusa({
+  baseUrl: MEDUSA_BACKEND_URL,
+  debug: process.env.NODE_ENV === "development",
+  // For production storefronts, set this from Medusa Admin and expose as
+  // NEXT_PUBLIC_MEDUSA_PUBLISHABLE_KEY in your environment.
+  publishableKey: process.env.NEXT_PUBLIC_MEDUSA_PUBLISHABLE_KEY,
+});

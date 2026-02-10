@@ -9,6 +9,8 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@medusajs/js-sdk": "^2.13.1",
+    "@medusajs/types": "^2.13.1",
     "@plasmicapp/cli": "^0.1.356",
     "@plasmicapp/react-web": "^0.2.416",
     "@plasmicpkgs/react-aria": "^0.0.166",

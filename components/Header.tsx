@@ -6,6 +6,7 @@ import {
   DefaultHeaderProps
 } from "./plasmic/non_public_project/PlasmicHeader";
 import { HTMLElementRefOf } from "@plasmicapp/react-web";
+import { sdk } from "../lib/sdk";
 
 // Your component props start with props for variants and slots you defined
 // in Plasmic, but you can add more here, like event handlers that you can
@@ -23,22 +24,41 @@ import { HTMLElementRefOf } from "@plasmicapp/react-web";
 export interface HeaderProps extends DefaultHeaderProps {}
 
 function Header_(props: HeaderProps, ref: HTMLElementRefOf<"div">) {
-  // Use PlasmicHeader to render this component as it was
-  // designed in Plasmic, by activating the appropriate variants,
-  // attaching the appropriate event handlers, etc.  You
-  // can also install whatever React hooks you need here to manage state or
-  // fetch data.
-  //
-  // Props you can pass into PlasmicHeader are:
-  // 1. Variants you want to activate,
-  // 2. Contents for slots you want to fill,
-  // 3. Overrides for any named node in the component to attach behavior and data,
-  // 4. Props to set on the root node.
-  //
-  // By default, we are just piping all HeaderProps here, but feel free
-  // to do whatever works for you.
+  const [authState, setAuthState] =
+    React.useState<"loggedIn" | "loggedOut">("loggedOut");
 
-  return <PlasmicHeader container={{ ref }} {...props} />;
+  React.useEffect(() => {
+    let isMounted = true;
+
+    const checkSession = async () => {
+      try {
+        // If a customer session exists, this succeeds; otherwise it throws.
+        await sdk.store.customer.retrieve();
+
+        if (isMounted) {
+          setAuthState("loggedIn");
+        }
+      } catch {
+        if (isMounted) {
+          setAuthState("loggedOut");
+        }
+      }
+    };
+
+    void checkSession();
+
+    return () => {
+      isMounted = false;
+    };
+  }, []);
+
+  return (
+    <PlasmicHeader
+      container={{ ref }}
+      authState={authState}
+      {...props}
+    />
+  );
 }
 
 const Header = React.forwardRef(Header_);
