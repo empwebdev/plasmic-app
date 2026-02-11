@@ -6,6 +6,7 @@ import {
   DefaultHeaderProps
 } from "./plasmic/non_public_project/PlasmicHeader";
 import { HTMLElementRefOf } from "@plasmicapp/react-web";
+import { useRouter } from "next/router";
 import { sdk } from "../lib/sdk";
 
 // Your component props start with props for variants and slots you defined
@@ -24,6 +25,7 @@ import { sdk } from "../lib/sdk";
 export interface HeaderProps extends DefaultHeaderProps {}
 
 function Header_(props: HeaderProps, ref: HTMLElementRefOf<"div">) {
+  const router = useRouter();
   const [authState, setAuthState] =
     React.useState<"loggedIn" | "loggedOut">("loggedOut");
 
@@ -52,10 +54,45 @@ function Header_(props: HeaderProps, ref: HTMLElementRefOf<"div">) {
     };
   }, []);
 
+  const handleLoginButtonClick = () => {
+    // Use authState directly since button label already reflects correct state
+    if (authState === "loggedIn") {
+      // "Manage Account" button - redirect to /manage-account
+      void router.push("/manage-account");
+    } else {
+      // "Log in" button - redirect to /login
+      void router.push("/login");
+    }
+  };
+
+  const handleSignupButtonClick = async () => {
+    if (authState === "loggedIn") {
+      // "Log Out" button - perform logout
+      try {
+        await sdk.auth.logout();
+        setAuthState("loggedOut");
+        // Optionally redirect to home page after logout
+        void router.push("/");
+      } catch (error) {
+        // eslint-disable-next-line no-alert
+        alert(`Logout failed: ${String(error)}`);
+      }
+    } else {
+      // "Create account" button - redirect to /create-account
+      void router.push("/create-account");
+    }
+  };
+
   return (
     <PlasmicHeader
       container={{ ref }}
       authState={authState}
+      customButton={{
+        onClick: handleLoginButtonClick,
+      }}
+      signUp={{
+        onClick: handleSignupButtonClick,
+      }}
       {...props}
     />
   );

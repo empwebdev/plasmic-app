@@ -82,6 +82,7 @@ export const PlasmicHomepage__ArgProps = new Array<ArgPropType>();
 export type PlasmicHomepage__OverridesType = {
   root?: Flex__<"div">;
   header?: Flex__<typeof Header>;
+  h1?: Flex__<"h1">;
 };
 
 export interface DefaultHomepageProps {}
@@ -157,6 +158,19 @@ function PlasmicHomepage__RenderFunc(props: {
             data-plasmic-override={overrides.header}
             className={classNames("__wab_instance", sty.header)}
           />
+
+          <h1
+            data-plasmic-name={"h1"}
+            data-plasmic-override={overrides.h1}
+            className={classNames(
+              projectcss.all,
+              projectcss.h1,
+              projectcss.__wab_text,
+              sty.h1
+            )}
+          >
+            {"You won't believe what happens next."}
+          </h1>
         </div>
       </div>
     </React.Fragment>
@@ -164,8 +178,9 @@ function PlasmicHomepage__RenderFunc(props: {
 }
 
 const PlasmicDescendants = {
-  root: ["root", "header"],
-  header: ["header"]
+  root: ["root", "header", "h1"],
+  header: ["header"],
+  h1: ["h1"]
 } as const;
 type NodeNameType = keyof typeof PlasmicDescendants;
 type DescendantsType<T extends NodeNameType> =
@@ -173,6 +188,7 @@ type DescendantsType<T extends NodeNameType> =
 type NodeDefaultElementType = {
   root: "div";
   header: typeof Header;
+  h1: "h1";
 };
 
 type ReservedPropsType = "variants" | "args" | "overrides";
@@ -238,6 +254,7 @@ export const PlasmicHomepage = Object.assign(
   {
     // Helper components rendering sub-elements
     header: makeNodeComponent("header"),
+    h1: makeNodeComponent("h1"),
 
     // Metadata about props expected for PlasmicHomepage
     internalVariantProps: PlasmicHomepage__VariantProps,

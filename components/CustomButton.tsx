@@ -20,9 +20,13 @@ import { HTMLElementRefOf } from "@plasmicapp/react-web";
 //
 // You can also stop extending from DefaultCustomButtonProps altogether and have
 // total control over the props for your component.
-export interface CustomButtonProps extends DefaultCustomButtonProps {}
+export interface CustomButtonProps extends DefaultCustomButtonProps {
+  onClick?: () => void | Promise<void>;
+}
 
 function CustomButton_(props: CustomButtonProps, ref: HTMLElementRefOf<"div">) {
+  const { onClick, ...restProps } = props;
+
   // Use PlasmicCustomButton to render this component as it was
   // designed in Plasmic, by activating the appropriate variants,
   // attaching the appropriate event handlers, etc.  You
@@ -38,7 +42,21 @@ function CustomButton_(props: CustomButtonProps, ref: HTMLElementRefOf<"div">) {
   // By default, we are just piping all CustomButtonProps here, but feel free
   // to do whatever works for you.
 
-  return <PlasmicCustomButton aNavbarLoginButton={{ ref }} {...props} />;
+  return (
+    <PlasmicCustomButton
+      aNavbarLoginButton={{
+        ref,
+        onClick: onClick
+          ? async (event) => {
+              event?.preventDefault?.();
+              event?.stopPropagation?.();
+              await onClick();
+            }
+          : undefined,
+      }}
+      {...restProps}
+    />
+  );
 }
 
 const CustomButton = React.forwardRef(CustomButton_);
