@@ -60,6 +60,7 @@ import {
 } from "@plasmicapp/react-web/lib/host";
 
 import CustomButton from "../../CustomButton"; // plasmic-import: IZmBAcfmTjEv/component
+import { MainMenu } from "../../MainMenu"; // plasmic-import: 68vzdVgSlIRh/codeComponent
 import { _useGlobalVariants } from "./plasmic"; // plasmic-import: bQQiQNuPFqALjXn1i5mrPi/projectModule
 import { _useStyleTokens } from "./PlasmicStyleTokensProvider"; // plasmic-import: bQQiQNuPFqALjXn1i5mrPi/styleTokensProvider
 
@@ -75,16 +76,10 @@ import ButtonIcon3Icon from "./icons/PlasmicIcon__ButtonIcon3"; // plasmic-impor
 
 createPlasmicElementProxy;
 
-export type PlasmicHeader__VariantMembers = {
-  authState: "loggedIn" | "loggedOut";
-};
-export type PlasmicHeader__VariantsArgs = {
-  authState?: SingleChoiceArg<"loggedIn" | "loggedOut">;
-};
+export type PlasmicHeader__VariantMembers = {};
+export type PlasmicHeader__VariantsArgs = {};
 type VariantPropType = keyof PlasmicHeader__VariantsArgs;
-export const PlasmicHeader__VariantProps = new Array<VariantPropType>(
-  "authState"
-);
+export const PlasmicHeader__VariantProps = new Array<VariantPropType>();
 
 export type PlasmicHeader__ArgsType = {};
 type ArgPropType = keyof PlasmicHeader__ArgsType;
@@ -117,10 +112,10 @@ export type PlasmicHeader__OverridesType = {
   customButton?: Flex__<typeof CustomButton>;
   aNavbarSignup?: Flex__<"div">;
   signUp?: Flex__<"div">;
+  mainMenu?: Flex__<typeof MainMenu>;
 };
 
 export interface DefaultHeaderProps {
-  authState?: SingleChoiceArg<"loggedIn" | "loggedOut">;
   className?: string;
 }
 
@@ -163,24 +158,6 @@ function PlasmicHeader__RenderFunc(props: {
   const refsRef = React.useRef({});
   const $refs = refsRef.current;
 
-  const stateSpecs: Parameters<typeof useDollarState>[0] = React.useMemo(
-    () => [
-      {
-        path: "authState",
-        type: "private",
-        variableType: "variant",
-        initFunc: ({ $props, $state, $queries, $ctx }) => $props.authState
-      }
-    ],
-    [$props, $ctx, $refs]
-  );
-  const $state = useDollarState(stateSpecs, {
-    $props,
-    $ctx,
-    $queries: {},
-    $refs
-  });
-
   const styleTokensClassNames = _useStyleTokens();
 
   return (
@@ -221,13 +198,7 @@ function PlasmicHeader__RenderFunc(props: {
               <div
                 data-plasmic-name={"aLogo"}
                 data-plasmic-override={overrides.aLogo}
-                className={classNames(projectcss.all, sty.aLogo, {
-                  [sty.aLogoauthState_loggedOut]: hasVariant(
-                    $state,
-                    "authState",
-                    "loggedOut"
-                  )
-                })}
+                className={classNames(projectcss.all, sty.aLogo)}
                 onClick={async event => {
                   const $steps = {};
 
@@ -312,19 +283,10 @@ function PlasmicHeader__RenderFunc(props: {
                   className={classNames(
                     projectcss.all,
                     projectcss.__wab_text,
-                    sty.button3,
-                    {
-                      [sty.button3authState_loggedIn]: hasVariant(
-                        $state,
-                        "authState",
-                        "loggedIn"
-                      )
-                    }
+                    sty.button3
                   )}
                 >
-                  {hasVariant($state, "authState", "loggedIn")
-                    ? "MyB2B"
-                    : "B2B"}
+                  {"B2B"}
                 </div>
               </div>
               <div
@@ -410,34 +372,13 @@ function PlasmicHeader__RenderFunc(props: {
               <div
                 data-plasmic-name={"navbarLogin"}
                 data-plasmic-override={overrides.navbarLogin}
-                className={classNames(projectcss.all, sty.navbarLogin, {
-                  [sty.navbarLoginauthState_loggedIn]: hasVariant(
-                    $state,
-                    "authState",
-                    "loggedIn"
-                  )
-                })}
+                className={classNames(projectcss.all, sty.navbarLogin)}
               >
                 <CustomButton
                   data-plasmic-name={"customButton"}
                   data-plasmic-override={overrides.customButton}
-                  authState={
-                    hasVariant($state, "authState", "loggedIn")
-                      ? "loggedIn"
-                      : "loggedOut"
-                  }
-                  className={classNames("__wab_instance", sty.customButton, {
-                    [sty.customButtonauthState_loggedIn]: hasVariant(
-                      $state,
-                      "authState",
-                      "loggedIn"
-                    ),
-                    [sty.customButtonauthState_loggedOut]: hasVariant(
-                      $state,
-                      "authState",
-                      "loggedOut"
-                    )
-                  })}
+                  authState={"loggedOut"}
+                  className={classNames("__wab_instance", sty.customButton)}
                 />
 
                 <div
@@ -451,31 +392,23 @@ function PlasmicHeader__RenderFunc(props: {
                     className={classNames(
                       projectcss.all,
                       projectcss.__wab_text,
-                      sty.signUp,
-                      {
-                        [sty.signUpauthState_loggedIn]: hasVariant(
-                          $state,
-                          "authState",
-                          "loggedIn"
-                        ),
-                        [sty.signUpauthState_loggedOut]: hasVariant(
-                          $state,
-                          "authState",
-                          "loggedOut"
-                        )
-                      }
+                      sty.signUp
                     )}
                     onClick={async event => {
                       const $steps = {};
                     }}
                   >
-                    {hasVariant($state, "authState", "loggedIn")
-                      ? "Log Out"
-                      : "Create account"}
+                    {"Create account"}
                   </div>
                 </div>
               </div>
             </div>
+            <MainMenu
+              data-plasmic-name={"mainMenu"}
+              data-plasmic-override={overrides.mainMenu}
+              authState={"loggedOut"}
+              className={classNames("__wab_instance", sty.mainMenu)}
+            />
           </div>
         </div>
       </div>
@@ -510,7 +443,8 @@ const PlasmicDescendants = {
     "navbarLogin",
     "customButton",
     "aNavbarSignup",
-    "signUp"
+    "signUp",
+    "mainMenu"
   ],
   navbar: [
     "navbar",
@@ -537,7 +471,8 @@ const PlasmicDescendants = {
     "navbarLogin",
     "customButton",
     "aNavbarSignup",
-    "signUp"
+    "signUp",
+    "mainMenu"
   ],
   navbarContainer: [
     "navbarContainer",
@@ -563,7 +498,8 @@ const PlasmicDescendants = {
     "navbarLogin",
     "customButton",
     "aNavbarSignup",
-    "signUp"
+    "signUp",
+    "mainMenu"
   ],
   navbarContent: [
     "navbarContent",
@@ -588,7 +524,8 @@ const PlasmicDescendants = {
     "navbarLogin",
     "customButton",
     "aNavbarSignup",
-    "signUp"
+    "signUp",
+    "mainMenu"
   ],
   navbarBrand: ["navbarBrand", "aLogo"],
   aLogo: ["aLogo"],
@@ -645,7 +582,8 @@ const PlasmicDescendants = {
   navbarLogin: ["navbarLogin", "customButton", "aNavbarSignup", "signUp"],
   customButton: ["customButton"],
   aNavbarSignup: ["aNavbarSignup", "signUp"],
-  signUp: ["signUp"]
+  signUp: ["signUp"],
+  mainMenu: ["mainMenu"]
 } as const;
 type NodeNameType = keyof typeof PlasmicDescendants;
 type DescendantsType<T extends NodeNameType> =
@@ -677,6 +615,7 @@ type NodeDefaultElementType = {
   customButton: typeof CustomButton;
   aNavbarSignup: "div";
   signUp: "div";
+  mainMenu: typeof MainMenu;
 };
 
 type ReservedPropsType = "variants" | "args" | "overrides";
@@ -766,6 +705,7 @@ export const PlasmicHeader = Object.assign(
     customButton: makeNodeComponent("customButton"),
     aNavbarSignup: makeNodeComponent("aNavbarSignup"),
     signUp: makeNodeComponent("signUp"),
+    mainMenu: makeNodeComponent("mainMenu"),
 
     // Metadata about props expected for PlasmicHeader
     internalVariantProps: PlasmicHeader__VariantProps,

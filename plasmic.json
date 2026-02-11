@@ -263,6 +263,12 @@
           "name": "Fetcher",
           "displayName": "plasmic-data-source-fetcher",
           "componentImportPath": "@plasmicapp/react-web/lib/data-sources"
+        },
+        {
+          "id": "68vzdVgSlIRh",
+          "name": "MainMenu",
+          "displayName": "MainMenu",
+          "componentImportPath": "./components/MainMenu"
         }
       ],
       "customFunctions": []
@@ -487,6 +493,6 @@
   "nextjsConfig": {
     "pagesDir": "../pages"
   },
-  "cliVersion": "0.1.356",
-  "$schema": "https://unpkg.com/@plasmicapp/cli@0.1.356/dist/plasmic.schema.json"
+  "cliVersion": "0.1.357",
+  "$schema": "https://unpkg.com/@plasmicapp/cli@0.1.357/dist/plasmic.schema.json"
 }
